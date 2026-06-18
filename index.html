@@ -448,6 +448,8 @@
     .work-img {
       background: #091424;
       overflow: hidden;
+      position: relative;
+      cursor: zoom-in;
     }
 
     .work-img img {
@@ -461,6 +463,71 @@
 
     .work-card.featured .work-img img { height: 420px; }
     .work-card:hover .work-img img { transform: scale(1.02); }
+
+    .work-img::after {
+      content: '⤢';
+      position: absolute;
+      bottom: 12px;
+      right: 12px;
+      background: rgba(0,0,0,0.65);
+      color: rgba(255,255,255,0.85);
+      border-radius: 6px;
+      padding: 5px 9px;
+      font-size: 0.9rem;
+      opacity: 0;
+      transition: opacity 0.2s;
+      pointer-events: none;
+    }
+
+    .work-img:hover::after { opacity: 1; }
+
+    /* ─── LIGHTBOX ─── */
+    .lightbox {
+      position: fixed;
+      inset: 0;
+      z-index: 9000;
+      background: rgba(0,0,0,0.93);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 32px;
+      opacity: 0;
+      pointer-events: none;
+      transition: opacity 0.25s ease;
+    }
+
+    .lightbox.open {
+      opacity: 1;
+      pointer-events: all;
+    }
+
+    .lightbox img {
+      max-width: 100%;
+      max-height: 90vh;
+      object-fit: contain;
+      border-radius: 10px;
+      box-shadow: 0 40px 100px rgba(0,0,0,0.6);
+      transform: scale(0.96);
+      transition: transform 0.25s ease;
+    }
+
+    .lightbox.open img { transform: scale(1); }
+
+    .lightbox-close {
+      position: absolute;
+      top: 20px;
+      right: 28px;
+      background: none;
+      border: none;
+      color: rgba(255,255,255,0.6);
+      font-size: 2.2rem;
+      cursor: pointer;
+      line-height: 1;
+      padding: 8px;
+      transition: color 0.2s;
+    }
+
+    .lightbox-close:hover { color: #fff; }
 
     .work-info { padding: 28px 32px; }
 
@@ -924,6 +991,173 @@
       margin-bottom: 28px;
     }
 
+    /* ─── ZEPHYR SHOWCASE ─── */
+    #zephyr {
+      background: #050b16;
+      border-top: 1px solid var(--border);
+      border-bottom: 1px solid var(--border);
+    }
+
+    .zephyr-intro {
+      max-width: 640px;
+      margin-bottom: 64px;
+    }
+
+    .zephyr-grid {
+      display: grid;
+      grid-template-columns: 300px 1fr;
+      gap: 60px;
+      align-items: start;
+    }
+
+    .zephyr-steps {
+      display: flex;
+      flex-direction: column;
+      gap: 4px;
+      position: sticky;
+      top: 100px;
+    }
+
+    .zephyr-step {
+      padding: 18px 20px;
+      border-radius: 10px;
+      cursor: pointer;
+      border: 1px solid transparent;
+      transition: all 0.2s;
+    }
+
+    .zephyr-step:hover { background: rgba(255,255,255,0.04); }
+
+    .zephyr-step.active {
+      background: var(--card);
+      border-color: var(--border);
+    }
+
+    .zephyr-step-num {
+      font-size: 0.62rem;
+      font-weight: 700;
+      letter-spacing: 0.16em;
+      text-transform: uppercase;
+      color: var(--accent);
+      margin-bottom: 5px;
+    }
+
+    .zephyr-step h4 {
+      font-size: 0.9rem;
+      font-weight: 700;
+      color: var(--white);
+      margin-bottom: 0;
+      line-height: 1.3;
+    }
+
+    .zephyr-step p {
+      font-size: 0.8rem;
+      color: var(--text-dim);
+      line-height: 1.65;
+      margin-top: 8px;
+      display: none;
+    }
+
+    .zephyr-step.active p { display: block; }
+
+    .zephyr-display {
+      border-radius: 16px;
+      overflow: hidden;
+      border: 1px solid rgba(255,255,255,0.08);
+      background: #0a1628;
+      box-shadow: 0 32px 80px rgba(0,0,0,0.5);
+    }
+
+    .zephyr-display img {
+      width: 100%;
+      height: auto;
+      display: block;
+      transition: opacity 0.25s ease;
+      cursor: pointer;
+    }
+
+    .zephyr-display img.fade { opacity: 0; }
+
+    .zephyr-nav {
+      display: flex;
+      gap: 8px;
+      padding: 20px;
+      background: rgba(255,255,255,0.03);
+      border-top: 1px solid rgba(255,255,255,0.06);
+      justify-content: center;
+    }
+
+    .zephyr-dot {
+      width: 8px; height: 8px;
+      border-radius: 50%;
+      background: rgba(255,255,255,0.15);
+      cursor: pointer;
+      transition: background 0.2s;
+      border: none;
+      padding: 0;
+    }
+
+    .zephyr-dot.active { background: var(--accent); }
+
+    /* ─── THOUGHT LEADERSHIP ─── */
+    .tl-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 24px;
+      margin-top: 60px;
+    }
+
+    .tl-card {
+      background: var(--card);
+      border: 1px solid var(--border);
+      border-radius: 14px;
+      padding: 36px;
+      display: flex;
+      flex-direction: column;
+      gap: 16px;
+      transition: border-color 0.2s;
+    }
+
+    .tl-card:hover { border-color: rgba(245,196,64,0.3); }
+
+    .tl-badge {
+      display: inline-flex;
+      align-items: center;
+      background: var(--accent-dim);
+      border: 1px solid rgba(245,196,64,0.2);
+      color: var(--accent);
+      font-size: 0.68rem;
+      font-weight: 700;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      padding: 5px 12px;
+      border-radius: 100px;
+      width: fit-content;
+    }
+
+    .tl-title {
+      font-size: 1.05rem;
+      font-weight: 700;
+      color: var(--white);
+      line-height: 1.3;
+    }
+
+    .tl-desc {
+      font-size: 0.875rem;
+      color: var(--text-dim);
+      line-height: 1.7;
+      flex: 1;
+    }
+
+    .tl-meta {
+      font-size: 0.72rem;
+      color: var(--text-dim);
+      letter-spacing: 0.06em;
+      text-transform: uppercase;
+      padding-top: 16px;
+      border-top: 1px solid var(--border);
+    }
+
     /* ─── SCROLLBAR ─── */
     ::-webkit-scrollbar { width: 5px; }
     ::-webkit-scrollbar-track { background: var(--bg); }
@@ -937,7 +1171,10 @@
       .philosophy-grid,
       .work-grid,
       .ai-grid,
+      .tl-grid,
+      .zephyr-grid,
       .principles-intro { grid-template-columns: 1fr; gap: 40px; }
+      .zephyr-steps { position: static; }
       .work-card.featured { grid-column: auto; }
       .stats-grid { grid-template-columns: repeat(3, 1fr); }
       .principles-grid { grid-template-columns: 1fr 1fr; }
@@ -968,9 +1205,9 @@
   </a>
   <ul class="nav-links">
     <li><a href="#work">Work</a></li>
-    <li><a href="#principles">Principles</a></li>
     <li><a href="#experience">Experience</a></li>
     <li><a href="#recognition">Recognition</a></li>
+    <li><a href="#thought-leadership">Leadership</a></li>
     <li><a href="#contact" class="nav-cta">Connect</a></li>
   </ul>
 </nav>
@@ -1105,10 +1342,26 @@
 
   <div class="work-grid">
 
-    <!-- Featured -->
+    <!-- MCE - Featured -->
     <div class="work-card featured fade-up">
-      <div class="work-img">
-        <img src="Sample work/Performance FULL - Desktop.png" alt="Aktana Performance Management Center" loading="lazy" />
+      <div class="work-img" onclick="openLightbox('Sample-work/ZS_MCE_Home.png')">
+        <img src="Sample-work/ZS_MCE_Home.png" alt="ZAIDYN MCE Agent Home" loading="lazy" />
+      </div>
+      <div class="work-info">
+        <div class="work-tags">
+          <span class="work-tag">Design Manager</span>
+          <span class="work-tag">AI &middot; Healthcare &middot; B2B SaaS</span>
+          <span class="work-tag">ZS &middot; ZAIDYN</span>
+        </div>
+        <h3>MCE Agent — Medical &amp; Customer Engagement</h3>
+        <p>An AI-powered platform for pharma commercial teams; featuring a home dashboard with KOL highlights, an Agent Assist panel that surfaces proactive scheduling and engagement recommendations, and deep HCP profiles with AI-generated pre-call prep. Built to help teams act faster on the right priorities.</p>
+      </div>
+    </div>
+
+    <!-- Performance Management -->
+    <div class="work-card featured fade-up">
+      <div class="work-img" onclick="openLightbox('Sample-work/Aktana_Performance.png')">
+        <img src="Sample-work/Aktana_Performance.png" alt="Aktana Performance Management Center" loading="lazy" />
       </div>
       <div class="work-info">
         <div class="work-tags">
@@ -1123,8 +1376,8 @@
 
     <!-- Campaign Builder -->
     <div class="work-card fade-up delay-1">
-      <div class="work-img">
-        <img src="Sample work/Campaign 5 - Validate - Desktop.png" alt="Aktana Campaign Journey Flow" loading="lazy" />
+      <div class="work-img" onclick="openLightbox('Sample-work/Aktana_Campaign.png')">
+        <img src="Sample-work/Aktana_Campaign.png" alt="Aktana Campaign Journey Flow" loading="lazy" />
       </div>
       <div class="work-info">
         <div class="work-tags">
@@ -1139,8 +1392,8 @@
 
     <!-- NBA Mobile -->
     <div class="work-card fade-up delay-2">
-      <div class="work-img">
-        <img src="Sample work/Screen Shot 2022-03-14 at 16.32.03.png" alt="Aktana Next Best Action Mobile" loading="lazy" />
+      <div class="work-img" onclick="openLightbox('Sample-work/Aktana_NBA.png')">
+        <img src="Sample-work/Aktana_NBA.png" alt="Aktana Next Best Action Mobile" loading="lazy" />
       </div>
       <div class="work-info">
         <div class="work-tags">
@@ -1155,8 +1408,8 @@
 
     <!-- Counsyl -->
     <div class="work-card fade-up delay-1">
-      <div class="work-img" style="background: #e8ecf0;">
-        <img src="Sample work/screencapture-syl-invisionapp-d-main-2018-11-17-09_08_26.png" alt="Counsyl Provider Portal" loading="lazy" />
+      <div class="work-img" style="background: #e8ecf0;" onclick="openLightbox('Sample-work/Counsyl_HCP.png')">
+        <img src="Sample-work/Counsyl_HCP.png" alt="Counsyl Provider Portal" loading="lazy" />
       </div>
       <div class="work-info">
         <div class="work-tags">
@@ -1171,8 +1424,8 @@
 
     <!-- Walmart -->
     <div class="work-card fade-up delay-2">
-      <div class="work-img">
-        <img src="Sample work/SL_InSitu.jpg" alt="Walmart Sustainability Leaders" loading="lazy" />
+      <div class="work-img" onclick="openLightbox('Sample-work/SL_InSitu.jpg')">
+        <img src="Sample-work/SL_InSitu.jpg" alt="Walmart Sustainability Leaders" loading="lazy" />
       </div>
       <div class="work-info">
         <div class="work-tags">
@@ -1185,6 +1438,62 @@
       </div>
     </div>
 
+  </div>
+</section>
+
+<!-- ─── ZEPHYR SHOWCASE ─── -->
+<section id="zephyr" class="section">
+  <div class="zephyr-intro">
+    <div class="section-label fade-up">Deep Dive &nbsp;·&nbsp; ZS · ZAIDYN · 2026</div>
+    <h2 class="section-title fade-up delay-1">Zephyr — AI Field Sales Companion</h2>
+    <p class="section-sub fade-up delay-2">Zephyr is a proactive AI companion built for pharma field reps. It knows your schedule, your accounts, and your goals; then puts the right intelligence in front of you at the right moment; before, during, and after every call.</p>
+  </div>
+
+  <div class="zephyr-grid fade-up">
+    <div class="zephyr-steps" id="zephyr-steps">
+      <div class="zephyr-step active" onclick="showZephyr(0, this)">
+        <div class="zephyr-step-num">01 — Welcome</div>
+        <h4>Meet Zephyr</h4>
+        <p>A voice-first AI assistant by ZAIDYN. Zephyr proactively supports reps in the field; understanding context and delivering actionable intelligence exactly when it's needed.</p>
+      </div>
+      <div class="zephyr-step" onclick="showZephyr(1, this)">
+        <div class="zephyr-step-num">02 — Context</div>
+        <h4>What Zephyr Knows</h4>
+        <p>Zephyr understands your world; your schedule and call plan, your location and nearby accounts, your team structure, and your current priorities. No setup. No manual data entry.</p>
+      </div>
+      <div class="zephyr-step" onclick="showZephyr(2, this)">
+        <div class="zephyr-step-num">03 — Capability</div>
+        <h4>What Zephyr Does</h4>
+        <p>Proactive, real-time intelligence. In-the-moment guidance during calls. Reduced prep time and cognitive load; so reps can focus on the relationship, not the research.</p>
+      </div>
+      <div class="zephyr-step" onclick="showZephyr(3, this)">
+        <div class="zephyr-step-num">04 — Dashboard</div>
+        <h4>Start the Day Right</h4>
+        <p>The home screen surfaces AI-prioritized highlights; KOLs to act on, pattern changes in prescribing behavior, and suggested next steps. All before the first call of the day.</p>
+      </div>
+      <div class="zephyr-step" onclick="showZephyr(4, this)">
+        <div class="zephyr-step-num">05 — In the Room</div>
+        <h4>Live Conversation Coaching</h4>
+        <p>Zephyr listens during the call and surfaces real-time coaching; acknowledging key talking points, flagging concerns like daily dosing patterns, and helping the rep respond with confidence.</p>
+      </div>
+      <div class="zephyr-step" onclick="showZephyr(5, this)">
+        <div class="zephyr-step-num">06 — Debrief</div>
+        <h4>Session Score</h4>
+        <p>After the call, a detailed score breaks down listening and rapport, clinical knowledge, objection handling, closing, and overall effectiveness; giving reps a clear picture of where to grow.</p>
+      </div>
+    </div>
+
+    <div class="zephyr-display">
+      <img id="zephyr-img" src="Sample-work/ZS_Zephyr_flow1.png" alt="Zephyr product screen" />
+      <div class="zephyr-nav" id="zephyr-nav">
+        <button class="zephyr-dot active" onclick="showZephyr(0, document.querySelectorAll('.zephyr-step')[0])"></button>
+        <button class="zephyr-dot" onclick="showZephyr(1, document.querySelectorAll('.zephyr-step')[1])"></button>
+        <button class="zephyr-dot" onclick="showZephyr(2, document.querySelectorAll('.zephyr-step')[2])"></button>
+        <button class="zephyr-dot" onclick="showZephyr(3, document.querySelectorAll('.zephyr-step')[3])"></button>
+        <button class="zephyr-dot" onclick="showZephyr(4, document.querySelectorAll('.zephyr-step')[4])"></button>
+        <button class="zephyr-dot" onclick="showZephyr(5, document.querySelectorAll('.zephyr-step')[5])"></button>
+      </div>
+    </div>
   </div>
 </section>
 
@@ -1410,6 +1719,34 @@
   </div>
 </section>
 
+<!-- ─── THOUGHT LEADERSHIP ─── -->
+<section id="thought-leadership" class="section">
+  <div class="section-label fade-up">Thought Leadership</div>
+  <h2 class="section-title fade-up delay-1">Frameworks that shape teams.</h2>
+  <p class="section-sub fade-up delay-2">Beyond the product work; Thomas has built planning methods, product vision artifacts, and team growth systems that have shaped how design teams at Aktana and ZS operate.</p>
+
+  <div class="tl-grid">
+    <div class="tl-card fade-up">
+      <div class="tl-badge">Methodology</div>
+      <div class="tl-title">Outcome Oriented Planning</div>
+      <p class="tl-desc">A planning framework Thomas created for Aktana's product teams; shifting roadmaps from feature lists to outcome-focused strategies. Focused on outcomes over output, built to evolve rather than stay static, and designed to give teams the space to learn. Presented to cross-functional stakeholders including product, engineering, and leadership.</p>
+      <div class="tl-meta">Aktana &nbsp;·&nbsp; Created &amp; Presented by Thomas Boyer</div>
+    </div>
+    <div class="tl-card fade-up delay-1">
+      <div class="tl-badge">Product Vision</div>
+      <div class="tl-title">Command Center — Vision Narrative</div>
+      <p class="tl-desc">Scenario writing Thomas authored to align Aktana's full organization on the vision for the Command Center. A storytelling approach that grounded omnichannel strategy, segmentation, and HCP journey design in real user behavior; making the product vision clear and tangible for every stakeholder.</p>
+      <div class="tl-meta">Aktana &nbsp;·&nbsp; Authored by Thomas Boyer</div>
+    </div>
+    <div class="tl-card fade-up delay-2">
+      <div class="tl-badge">Team Development</div>
+      <div class="tl-title">Design Learning Program</div>
+      <p class="tl-desc">A structured learning system Thomas built for the ZS design team. Individual Learning Plans co-owned by each designer and their manager; Degreed core pathways covering design thinking, creative skills, and leadership; plus personalized growth plans and IxDF coursework. Built to grow the team and keep people engaged long-term.</p>
+      <div class="tl-meta">ZS · ZAIDYN &nbsp;·&nbsp; Built by Thomas Boyer</div>
+    </div>
+  </div>
+</section>
+
 <!-- ─── EDUCATION ─── -->
 <section id="education" class="section">
   <div class="section-label fade-up">Education</div>
@@ -1452,6 +1789,12 @@
     </div>
   </div>
 </section>
+
+<!-- ─── LIGHTBOX ─── -->
+<div class="lightbox" id="lightbox" onclick="closeLightbox(event)">
+  <button class="lightbox-close" onclick="closeLightbox()">&times;</button>
+  <img id="lightbox-img" src="" alt="" />
+</div>
 
 <!-- ─── FOOTER ─── -->
 <footer>
@@ -1638,6 +1981,57 @@
       ]
     }
   ];
+
+  // ─── LIGHTBOX ───
+  function openLightbox(src) {
+    const lb = document.getElementById('lightbox');
+    const img = document.getElementById('lightbox-img');
+    img.src = src;
+    lb.classList.add('open');
+    document.body.style.overflow = 'hidden';
+  }
+
+  function closeLightbox(e) {
+    if (e && e.target === document.getElementById('lightbox-img')) return;
+    document.getElementById('lightbox').classList.remove('open');
+    document.body.style.overflow = '';
+  }
+
+  document.addEventListener('keydown', e => {
+    if (e.key === 'Escape') closeLightbox();
+  });
+
+  // ─── ZEPHYR WALKTHROUGH ───
+  const zephyrScreens = [
+    'Sample-work/ZS_Zephyr_flow1.png',
+    'Sample-work/ZS_Zephyr_flow2.png',
+    'Sample-work/ZS_Zephyr_flow3.png',
+    'Sample-work/ZS_Zephyr_Home.png',
+    'Sample-work/ZS_Zephyr_Practice.png',
+    'Sample-work/ZS_Zephyr_PracticeScore.png'
+  ];
+
+  function showZephyr(idx, stepEl) {
+    document.querySelectorAll('.zephyr-step').forEach(s => s.classList.remove('active'));
+    document.querySelectorAll('.zephyr-dot').forEach(d => d.classList.remove('active'));
+    stepEl.classList.add('active');
+    document.querySelectorAll('.zephyr-dot')[idx].classList.add('active');
+
+    const img = document.getElementById('zephyr-img');
+    img.classList.add('fade');
+    setTimeout(() => {
+      img.src = zephyrScreens[idx];
+      img.classList.remove('fade');
+    }, 200);
+  }
+
+  // Click Zephyr screen to advance
+  document.getElementById('zephyr-img').addEventListener('click', function() {
+    const steps = document.querySelectorAll('.zephyr-step');
+    const current = Array.from(steps).findIndex(s => s.classList.contains('active'));
+    const next = (current + 1) % steps.length;
+    showZephyr(next, steps[next]);
+  });
 
   function showExp(idx, el) {
     document.querySelectorAll('.timeline-item').forEach(t => t.classList.remove('active'));
