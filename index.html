@@ -443,7 +443,27 @@
       box-shadow: 0 20px 60px rgba(0,0,0,0.4);
     }
 
-    .work-card.featured { grid-column: 1 / -1; }
+    .work-card.featured {
+      grid-column: 1 / -1;
+      display: grid;
+      grid-template-columns: minmax(280px, 400px) 1fr;
+      align-items: stretch;
+    }
+
+    .work-card.featured .work-info {
+      order: 1;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+    }
+
+    .work-card.featured .work-img {
+      order: 2;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 20px;
+    }
 
     .work-img {
       background: #091424;
@@ -461,8 +481,16 @@
       transition: transform 0.5s ease;
     }
 
-    .work-card.featured .work-img img { height: 420px; }
+    .work-card.featured .work-img img {
+      height: auto;
+      max-height: 480px;
+      width: 100%;
+      object-fit: contain;
+      border-radius: 8px;
+    }
+
     .work-card:hover .work-img img { transform: scale(1.02); }
+    .work-card.featured:hover .work-img img { transform: none; }
 
     .work-img::after {
       content: '⤢';
@@ -543,9 +571,9 @@
       font-weight: 600;
       letter-spacing: 0.08em;
       text-transform: uppercase;
-      color: var(--text-dim);
-      background: rgba(255,255,255,0.05);
-      border: 1px solid var(--border);
+      color: var(--accent);
+      background: var(--accent-dim);
+      border: 1px solid rgba(245,196,64,0.45);
       padding: 4px 10px;
       border-radius: 4px;
     }
@@ -1175,7 +1203,9 @@
       .zephyr-grid,
       .principles-intro { grid-template-columns: 1fr; gap: 40px; }
       .zephyr-steps { position: static; }
-      .work-card.featured { grid-column: auto; }
+      .work-card.featured { grid-column: auto; grid-template-columns: 1fr; }
+      .work-card.featured .work-info { order: 2; }
+      .work-card.featured .work-img { order: 1; }
       .stats-grid { grid-template-columns: repeat(3, 1fr); }
       .principles-grid { grid-template-columns: 1fr 1fr; }
       .rec-grid { grid-template-columns: 1fr; }
@@ -1226,7 +1256,7 @@
     <h1 class="headline">Thomas<br/><span>Boyer</span></h1>
 
     <p class="hero-sub">
-      <strong>Design is not the goal.</strong> What gets built; and how it helps the people who use it; that is what matters. Thomas has 15+ years of turning people-first ideas into products that get used, work well, and drive real results.
+      <strong>Design is not the goal.</strong> What gets built; and how it helps the people who use it; that is what matters. Thomas has 20+ years of turning people-first ideas into products that get used, work well, and drive real results.
     </p>
 
     <div class="hero-actions">
@@ -1683,7 +1713,7 @@
     <div class="rec-card fade-up delay-2">
       <div style="margin-bottom: 24px;">
         <div style="font-size: 0.7rem; font-weight: 700; letter-spacing: 0.12em; text-transform: uppercase; color: var(--accent); margin-bottom: 12px;">Domain Expertise</div>
-        <p style="font-size: 0.875rem; color: var(--text-dim); line-height: 1.65;">15+ years spanning Healthcare · Life Sciences · AI · Enterprise SaaS · eCommerce · Retail · Immersive Experience Design</p>
+        <p style="font-size: 0.875rem; color: var(--text-dim); line-height: 1.65;">20+ years spanning Healthcare · Life Sciences · AI · Enterprise SaaS · eCommerce · Retail · Immersive Experience Design</p>
       </div>
       <div>
         <div style="font-size: 0.7rem; font-weight: 700; letter-spacing: 0.12em; text-transform: uppercase; color: var(--accent); margin-bottom: 12px;">Thought Leadership</div>
