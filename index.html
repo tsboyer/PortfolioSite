@@ -55,14 +55,18 @@ a{color:inherit;}
 nav{
   position:fixed; top:0; left:0; right:0; z-index:200;
   display:flex; justify-content:space-between; align-items:center;
-  padding:22px clamp(24px, 5vw, 80px);
-  background:rgba(22,20,15,0.9);
+  padding:18px 56px;
+  background:rgba(6,13,26,0.86);
   backdrop-filter:blur(10px);
-  border-bottom:1px solid var(--rule);
+  border-bottom:1px solid var(--accent);
 }
-.nav-name{font-weight:600; font-size:1rem; letter-spacing:0.01em; text-decoration:none;}
-.nav-links{display:flex; gap:34px; list-style:none;}
-.nav-links a{font-size:0.95rem; text-decoration:none; color:var(--ink-dim); transition:color 0.2s;}
+.nav-name{text-decoration:none;}
+.nav-name span{
+  font-family:'Fraunces', Georgia, serif; font-weight:600; font-size:1.05rem;
+  color:var(--paper); letter-spacing:-0.01em;
+}
+.nav-links{display:flex; gap:32px; list-style:none; align-items:center;}
+.nav-links a{font-size:0.88rem; text-decoration:none; color:var(--ink-dim); transition:color 0.2s;}
 .nav-links a:hover{color:var(--paper);}
 
 /* ─── LAYOUT SHELL ─── */
@@ -74,30 +78,25 @@ nav{
 .section-sub{max-width:620px; color:var(--ink-dim); font-size:1.15rem;}
 
 /* ─── HERO ─── */
-#hero{position:relative; min-height:96vh; display:flex; align-items:center; overflow:hidden;}
+#hero{position:relative; min-height:92vh; display:flex; align-items:center; overflow:hidden; padding-top:80px;}
 #hero-canvas{position:absolute; inset:0; pointer-events:none; opacity:0.7; z-index:0;}
-.hero-visual{position:absolute; top:0; right:0; bottom:0; width:54%; z-index:1;}
-.hero-visual img{width:100%; height:100%; object-fit:cover; object-position:top left; display:block;}
-.hero-visual-fade{
-  position:absolute; inset:0;
-  background:linear-gradient(100deg, var(--bg) 0%, rgba(6,13,26,0.65) 16%, rgba(6,13,26,0.15) 38%, transparent 55%);
+.hero-wrap{
+  position:relative; z-index:2; max-width:1360px; margin:0 auto;
+  padding:0 clamp(24px, 5vw, 80px) 0 clamp(16px, 2.5vw, 40px);
+  display:grid; grid-template-columns:1.15fr 0.85fr; gap:56px; align-items:center; width:100%;
 }
-.hero-visual-tag{
-  position:absolute; bottom:28px; right:28px; background:rgba(6,13,26,0.75);
-  border:1px solid var(--rule); color:var(--ink-dim); font-size:0.8rem;
-  padding:8px 14px; letter-spacing:0.01em;
-}
-.hero-inner{position:relative; z-index:2; max-width:640px;}
+.hero-inner{max-width:600px;}
 .hero-role{font-size:0.95rem; color:var(--accent); margin-bottom:24px; font-weight:500;}
 h1.name{font-size:clamp(3rem,6.4vw,5.4rem); font-weight:600; line-height:1; margin-bottom:28px;}
 .hero-lede{font-size:1.35rem; color:var(--ink-dim); line-height:1.6; max-width:560px; margin-bottom:48px;}
 .hero-lede strong{color:var(--paper); font-weight:500;}
 .hero-actions{display:flex; gap:16px; margin-bottom:60px; flex-wrap:wrap;}
+.hero-visual{border:1px solid var(--rule); background:var(--bg-raised); aspect-ratio:4/3; overflow:hidden;}
+.hero-visual img{width:100%; height:100%; object-fit:cover; object-position:top left; display:block;}
 @media (max-width:900px){
-  #hero{min-height:auto; flex-direction:column; align-items:stretch; padding-top:120px;}
-  .hero-visual{position:relative; width:100%; height:46vh; order:-1; margin-bottom:36px;}
-  .hero-visual-fade{background:linear-gradient(0deg, var(--bg) 0%, transparent 30%);}
-  .hero-inner{padding:0 clamp(24px, 5vw, 80px) 56px;}
+  #hero{min-height:auto; padding-top:120px;}
+  .hero-wrap{grid-template-columns:1fr; gap:32px; padding:0 clamp(24px, 5vw, 80px);}
+  .hero-visual{order:-1; aspect-ratio:16/10;}
 }
 .btn{
   padding:15px 30px; font-size:0.98rem; font-weight:500; text-decoration:none;
@@ -105,8 +104,8 @@ h1.name{font-size:clamp(3rem,6.4vw,5.4rem); font-weight:600; line-height:1; marg
 }
 .btn-fill{background:var(--paper); color:var(--bg);}
 .btn-fill:hover{opacity:0.85;}
-.btn-line{border:1px solid var(--rule); color:var(--ink);}
-.btn-line:hover{border-color:var(--accent); color:var(--paper);}
+.btn-line{border:1px solid var(--accent); color:var(--ink);}
+.btn-line:hover{border-color:var(--accent); color:var(--paper); background:var(--accent-dim);}
 
 .hero-meta{display:flex; gap:44px; flex-wrap:wrap; padding-top:30px; border-top:1px solid var(--rule); max-width:640px;}
 .hero-meta-item span{display:block; font-size:0.78rem; color:var(--ink-dim); margin-bottom:5px;}
@@ -221,7 +220,9 @@ footer{
 <body>
 
 <nav>
-  <a href="#hero" class="nav-name">Thomas Boyer</a>
+  <a href="#hero" class="nav-name">
+    <span>Thomas Boyer</span>
+  </a>
   <ul class="nav-links">
     <li><a href="#work">Work</a></li>
     <li><a href="#experience">Experience</a></li>
@@ -232,14 +233,9 @@ footer{
 <!-- ─── HERO ─── -->
 <section id="hero">
   <canvas id="hero-canvas"></canvas>
-  <div class="hero-visual">
-    <img src="Sample-work/ZS_MCE_Home.png" alt="MCE Agent, an AI product Thomas designed at ZS" />
-    <div class="hero-visual-fade"></div>
-    <span class="hero-visual-tag">MCE Agent — ZS, ZAIDYN, 2026</span>
-  </div>
-  <div class="wrap">
+  <div class="hero-wrap">
     <div class="hero-inner">
-      <div class="hero-role">Design Manager, ZS · ZAIDYN</div>
+      <div class="hero-role">Systems-thinking, human-centered design leader</div>
       <h1 class="name">Thomas Boyer</h1>
       <p class="hero-lede">
         <strong>I design AI products that pharma sales and medical teams actually trust enough to use.</strong>
@@ -250,10 +246,13 @@ footer{
         <a href="mailto:tsboyer@duck.com" class="btn btn-line">Email me</a>
       </div>
       <div class="hero-meta">
-        <div class="hero-meta-item"><span>Team</span><strong>14 designers, US &amp; India</strong></div>
+        <div class="hero-meta-item"><span>Role</span><strong>Design Manager, ZS · ZAIDYN</strong></div>
         <div class="hero-meta-item"><span>Focus</span><strong>MedTech CRM · AI · Enterprise SaaS</strong></div>
         <div class="hero-meta-item"><span>Tools</span><strong>Figma, Figma Make, Claude, Cursor</strong></div>
       </div>
+    </div>
+    <div class="hero-visual">
+      <img src="Sample-work/ZS_MCE_Home.png" alt="MCE Agent, an AI product Thomas designed at ZS" />
     </div>
   </div>
 </section>
