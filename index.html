@@ -81,9 +81,9 @@ nav{
 #hero{position:relative; min-height:92vh; display:flex; align-items:center; overflow:hidden; padding-top:80px;}
 #hero-canvas{position:absolute; inset:0; pointer-events:none; opacity:0.7; z-index:0;}
 .hero-wrap{
-  position:relative; z-index:2; max-width:1440px; margin:0 auto;
-  padding:0 clamp(24px, 5vw, 80px) 0 clamp(16px, 2.5vw, 40px);
-  display:grid; grid-template-columns:0.9fr 1.25fr; gap:48px; align-items:stretch; width:100%;
+  position:relative; z-index:2; width:100%;
+  padding:0 56px 0 clamp(128px, 2.5vw, 160px);
+  display:grid; grid-template-columns:minmax(320px, 560px) minmax(760px, 1fr); gap:48px; align-items:stretch;
   min-height:640px;
 }
 .hero-inner{max-width:560px; display:flex; flex-direction:column; justify-content:center;}
