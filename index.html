@@ -92,7 +92,8 @@ h1.name{font-size:clamp(2.7rem,5.6vw,4.8rem); font-weight:600; line-height:1; ma
 .hero-lede{font-size:1.3rem; color:var(--ink-dim); line-height:1.6; max-width:540px; margin-bottom:44px;}
 .hero-lede strong{color:var(--paper); font-weight:500;}
 .hero-actions{display:flex; gap:16px; margin-bottom:60px; flex-wrap:wrap;}
-.hero-visual{border:1px solid var(--rule); background:var(--bg-raised); overflow:hidden; height:100%;}
+.hero-visual{display:block; border:1px solid var(--rule); background:var(--bg-raised); overflow:hidden; height:100%; transition:border-color 0.2s;}
+.hero-visual:hover, .hero-visual:focus-visible{border-color:var(--accent);}
 .hero-visual img{width:100%; height:100%; object-fit:cover; object-position:top left; display:block;}
 @media (max-width:900px){
   #hero{min-height:auto; padding-top:120px;}
@@ -252,9 +253,9 @@ footer{
         <div class="hero-meta-item"><span>Tools</span><strong>Figma, Figma Make, Claude, Cursor</strong></div>
       </div>
     </div>
-    <div class="hero-visual">
+    <a href="#zephyr" class="hero-visual" aria-label="Jump to the Zephyr deep dive">
       <img src="Sample-work/ZS_Zephyr_flow1.png" alt="Zephyr, an AI field companion Thomas designed at ZS" />
-    </div>
+    </a>
   </div>
 </section>
 
@@ -355,12 +356,12 @@ footer{
           <p>AI-prioritized highlights — KOLs to act on, prescribing pattern changes, suggested next steps — before the first call of the day.</p>
         </div>
         <div class="zephyr-step" onclick="showZephyr(4, this)">
-          <h4>In the room</h4>
-          <p>Real-time coaching during the call: acknowledging talking points, flagging concerns, helping the rep respond with confidence.</p>
+          <h4>Practice pitch</h4>
+          <p>Refine HCP communication with a simulated experience where Zephyr uses the doctor's preferences and concerns in its persona.</p>
         </div>
         <div class="zephyr-step" onclick="showZephyr(5, this)">
           <h4>The debrief</h4>
-          <p>A session score breaking down rapport, clinical knowledge, objection handling, and closing — a clear picture of where to grow.</p>
+          <p>A session score breaking down rapport, clinical knowledge, objection handling, and closing — a clear view of communication strengths, focus areas, and how to improve the message.</p>
         </div>
       </div>
 
